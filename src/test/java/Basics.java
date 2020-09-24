@@ -1,4 +1,7 @@
+import files.Payload;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -12,29 +15,26 @@ public class Basics {
         // then --> validate response
 
         RestAssured.baseURI = "https://rahulshettyacademy.com";
-        given().log().all()
-                .queryParam("key", "qaclick123")
-                .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "    \"location\": {\n" +
-                        "        \"lat\": -38.383494,\n" +
-                        "        \"lng\": 33.427362\n" +
-                        "    },\n" +
-                        "    \"accuracy\": 50,\n" +
-                        "    \"name\": \"Johny House\",\n" +
-                        "    \"phone_number\": \"+1(773) 999 1111\",\n" +
-                        "    \"address\": \"21 W Scott Str, Miller Park, IL 60703\",\n" +
-                        "    \"types\": [\n" +
-                        "        \"Shoe Park\",\n" +
-                        "        \"Shop\"\n" +
-                        "    ],\n" +
-                        "    \"website\": \"http://mypark.com\",\n" +
-                        "    \"language\": \"French-IN\"\n" +
-                        "}")
+        String response =
+                given()//.log().all()
+                        .queryParam("key", "qaclick123")
+                        .header("Content-Type", "application/json")
+                        .body(Payload.addPlace())
                 .when().post("maps/api/place/add/json")
-                .then().log().all().assertThat().statusCode(200)
+                .then()//.log().all()
+                        .assertThat().statusCode(200)
                         .body("scope", equalTo("APP"))
-                        .header("Server", "Apache/2.4.18 (Ubuntu)");
+                        .header("Server", "Apache/2.4.18 (Ubuntu)")
+                .extract()
+                        .response().asString();
+
+        System.out.println(response);
+
+        JsonPath js = new JsonPath(response); // for parsing JSON
+        String place_id = js.getString("place_id");
+        System.out.println(place_id);
+
+
 
 
     }
