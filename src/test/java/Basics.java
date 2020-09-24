@@ -1,4 +1,5 @@
 import files.Payload;
+import files.ReusableMethods;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
@@ -17,7 +18,8 @@ public class Basics {
                 // when --> submit the API - resource, http method
                 // then --> validate response
 
-                RestAssured.baseURI = "https://rahulshettyacademy.com";
+        RestAssured.baseURI = "https://rahulshettyacademy.com";
+
         String response =
                 given().log().all()
                         .queryParam("key", "qaclick123")
@@ -61,8 +63,9 @@ public class Basics {
                 .assertThat().statusCode(200)
                 .extract().response().asString();
 
-        JsonPath getPlaceResponse_jsp = new JsonPath(getPlaceResponse);
-        String actualAddress = getPlaceResponse_jsp.getString("address");
+        //JsonPath getPlaceResponse_jsp = new JsonPath(response);
+        JsonPath js1 = ReusableMethods.rawToJson(getPlaceResponse);
+        String actualAddress = js1.getString("address");
         System.out.println(actualAddress);
 
         // JUnit, TestNG
