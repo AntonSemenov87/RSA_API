@@ -9,7 +9,7 @@ public class Payload {
                 "        \"lng\": 33.427362\n" +
                 "    },\n" +
                 "    \"accuracy\": 50,\n" +
-                "    \"name\": \"Johny House\",\n" +
+                "    \"name\": \"Slava House\",\n" +
                 "    \"phone_number\": \"+1(773) 999 1111\",\n" +
                 "    \"address\": \"21 W Scott Str, Miller Park, IL 60703\",\n" +
                 "    \"types\": [\n" +
@@ -17,7 +17,7 @@ public class Payload {
                 "        \"Shop\"\n" +
                 "    ],\n" +
                 "    \"website\": \"http://mypark.com\",\n" +
-                "    \"language\": \"French-IN\"\n" +
+                "    \"language\": \"Ukrainian-UA\"\n" +
                 "}";
     }
 
