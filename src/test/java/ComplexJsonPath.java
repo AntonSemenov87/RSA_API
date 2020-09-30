@@ -29,7 +29,12 @@ public class ComplexJsonPath {
         }
 
 
-      //  5. Print no of copies sold by RPA Course
+      //  5. Print no of copies sold by RPA Course (and also total of all copies)
+        int numOfCopies = 0;
+        for (int i = 0; i < count; i++) {
+            numOfCopies += js.getInt("courses["+i+"].copies");
+        }
+        System.out.println("Number of copies sold total: " + numOfCopies);
         int numOfRPACopies = js.getInt("courses[2].copies");
         System.out.println(numOfRPACopies);
 
