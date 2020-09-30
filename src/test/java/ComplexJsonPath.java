@@ -35,8 +35,17 @@ public class ComplexJsonPath {
             numOfCopies += js.getInt("courses["+i+"].copies");
         }
         System.out.println("Number of copies sold total: " + numOfCopies);
-        int numOfRPACopies = js.getInt("courses[2].copies");
-        System.out.println(numOfRPACopies);
+
+        for (int i = 0; i < count; i++) {
+            String title = js.getString("courses[" + i + "].title");
+            if (title.equalsIgnoreCase("RPA")) {
+                int copies = js.getInt("courses[" + i + "].copies");
+                System.out.println("Copies of RPA sold: " + copies);
+                break;
+            }
+        }
+
+
 
        // 6. Verify if Sum of all Course prices matches with Purchase Amount
         int sum = 0;
